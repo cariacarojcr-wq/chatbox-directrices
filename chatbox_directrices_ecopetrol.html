@@ -67,16 +67,21 @@
             filas.forEach(fila => {
                 const tema = fila["Tema"];
                 const pregunta = fila["Pregunta"];
-                const anio = fila["Año"];
-                const respuesta = fila["Respuesta"] || "";
-                const corporativo = fila["Corporativo"] || "";
+                const corporativo = fila["Directriz Corporativa"] || "";
                 const link = fila["Link"] || "";
 
                 if (!chatbotData[tema]) chatbotData[tema] = {};
                 if (!chatbotData[tema][pregunta]) {
-                    chatbotData[tema][pregunta] = { corporativo, link };
+                    chatbotData[tema][pregunta] = {
+                        "2021": fila["Año 2021"] || "",
+                        "2022": fila["Año 2022"] || "",
+                        "2023": fila["Año 2023"] || "",
+                        "2024": fila["Año 2024"] || "",
+                        "2025": fila["Año 2025"] || "",
+                        "corporativo": corporativo,
+                        "link": link
+                    };
                 }
-                chatbotData[tema][pregunta][anio] = respuesta;
             });
 
             // Cargar los temas en el combo
@@ -125,12 +130,12 @@
             const data = chatbotData[tema][pregunta];
             container.innerHTML = `
                 <strong>Respuesta por año:</strong><br>
-                <b>2021:</b> ${data['2021'] || ''}<br>
-                <b>2022:</b> ${data['2022'] || ''}<br>
-                <b>2023:</b> ${data['2023'] || ''}<br>
-                <b>2024:</b> ${data['2024'] || ''}<br>
-                <b>2025:</b> ${data['2025'] || ''}<br><br>
-                <strong>Directriz Corporativa:</strong><br>${data['corporativo'] || ''}<br><br>
+                <b>2021:</b> ${data['2021']}<br>
+                <b>2022:</b> ${data['2022']}<br>
+                <b>2023:</b> ${data['2023']}<br>
+                <b>2024:</b> ${data['2024']}<br>
+                <b>2025:</b> ${data['2025']}<br><br>
+                <strong>Directriz Corporativa:</strong><br>${data['corporativo']}<br><br>
                 <strong>Link de soporte:</strong><br>
                 <a href="${data['link']}" target="_blank">${data['link']}</a>
             `;
