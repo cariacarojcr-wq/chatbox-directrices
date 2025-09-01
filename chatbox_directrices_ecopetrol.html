@@ -5,9 +5,10 @@
   <style>
     body {
         font-family: Arial, sans-serif;
-        background-color: #FFD100;
-        padding: 20px;
         margin: 0;
+        padding: 20px;
+        background: url("https://ecopetrol.sharepoint.com/sites/DirectricesExogena/Documentos%20compartidos/fondo_ecopetrol.jpg?download=1") no-repeat center center fixed;
+        background-size: cover;
     }
     h2 {
         color: #003A32;
@@ -53,16 +54,16 @@
 
     // === 1. Cargar Excel desde SharePoint ===
     async function cargarExcel() {
-        const url = "https://ecopetrol.sharepoint.com/sites/DirectricesExogena/Documentos%20compartidos/Matriz%20de%20directrices.xlsx";
+        const url = "https://ecopetrol.sharepoint.com/sites/DirectricesExogena/Documentos%20compartidos/Matriz%20de%20directrices.xlsx?download=1";
 
         try {
             const response = await fetch(url, { credentials: "include" });
+            if (!response.ok) throw new Error("HTTP " + response.status);
             const data = await response.arrayBuffer();
             const workbook = XLSX.read(data, { type: "array" });
             const hoja = workbook.Sheets[workbook.SheetNames[0]];
             const filas = XLSX.utils.sheet_to_json(hoja);
 
-            // Convertir filas en la estructura chatbotData
             chatbotData = {};
             filas.forEach(fila => {
                 const tema = fila["Tema"];
@@ -71,20 +72,17 @@
                 const link = fila["Link"] || "";
 
                 if (!chatbotData[tema]) chatbotData[tema] = {};
-                if (!chatbotData[tema][pregunta]) {
-                    chatbotData[tema][pregunta] = {
-                        "2021": fila["Año 2021"] || "",
-                        "2022": fila["Año 2022"] || "",
-                        "2023": fila["Año 2023"] || "",
-                        "2024": fila["Año 2024"] || "",
-                        "2025": fila["Año 2025"] || "",
-                        "corporativo": corporativo,
-                        "link": link
-                    };
-                }
+                chatbotData[tema][pregunta] = {
+                    "2021": fila["Año 2021"] || "",
+                    "2022": fila["Año 2022"] || "",
+                    "2023": fila["Año 2023"] || "",
+                    "2024": fila["Año 2024"] || "",
+                    "2025": fila["Año 2025"] || "",
+                    "corporativo": corporativo,
+                    "link": link
+                };
             });
 
-            // Cargar los temas en el combo
             loadTemas();
         } catch (err) {
             document.getElementById('respuestaContainer').innerHTML =
@@ -150,7 +148,7 @@
         window.location.href = mailto;
     }
 
-    // === Ejecutar al cargar ===
+    // Ejecutar al cargar
     window.onload = cargarExcel;
   </script>
 </body>
