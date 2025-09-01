@@ -1,13 +1,17 @@
-<html>
+<html lang="es">
 <head>
-  <meta charset="utf-8"/>
+  <meta charset="UTF-8">
   <title>Chatbox Directrices Exógena</title>
   <style>
     body {
         font-family: Arial, sans-serif;
-        background-color: #FFD100;
-        padding: 20px;
         margin: 0;
+        padding: 20px;
+        background-image: url("https://ecopetrol.sharepoint.com/:i:/r/sites/DirectricesExogena/Documentos%20compartidos/fondo_ecopetrol.jpg?csf=1&web=1&e=BUi08r");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        color: #003A32;
     }
     h2 {
         color: #003A32;
@@ -16,12 +20,14 @@
         padding: 10px;
         margin: 10px 0;
         width: 100%;
+        border-radius: 8px;
+        border: 1px solid #003A32;
     }
     .response-box {
-        background-color: #BFD730;
+        background-color: rgba(191, 215, 48, 0.9);
         padding: 15px;
-        border-radius: 5px;
-        margin-top: 10px;
+        border-radius: 10px;
+        margin-top: 15px;
         color: #003A32;
     }
     a {
@@ -84,7 +90,6 @@
                 }
             });
 
-            // Cargar los temas en el combo
             loadTemas();
         } catch (err) {
             document.getElementById('respuestaContainer').innerHTML =
