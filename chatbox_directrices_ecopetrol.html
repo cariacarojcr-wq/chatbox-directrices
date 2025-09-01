@@ -7,7 +7,7 @@
         font-family: Arial, sans-serif;
         margin: 0;
         padding: 20px;
-        background: url("const url = "const url = "https://ecopetrol.sharepoint.com/sites/DirectricesExogena/Shared%20Documents/Matriz%20de%20directrices.xlsx?download=1";") no-repeat center center fixed;
+        background: url("const url = "const url = https://ecopetrol.sharepoint.com/:i:/r/sites/DirectricesExogena/Documentos%20compartidos/fondo_ecopetrol.jpg?download=1") no-repeat center center fixed;
         background-size: cover;
     }
     h2 {
@@ -55,7 +55,8 @@
     // === 1. Cargar Excel desde SharePoint ===
     async function cargarExcel() {
         // ⚠️ Asegúrate de cambiar este enlace al correcto de tu Excel
-        const url = "https://ecopetrol.sharepoint.com/:x:/r/sites/DirectricesExogena/Documentos%20compartidos/Matriz%20de%20directrices.xlsx?d=w002340b9e4b04dc2969fed413d0ffcbb&csf=1&web=1&e=tXan3?download=1";
+        const url = async function cargarExcel() {
+        const url = "https://ecopetrol.sharepoint.com/sites/DirectricesExogena/Documentos%20compartidos/Matriz%20de%20directrices.xlsx";
 
         try {
             const response = await fetch(url, { credentials: "include" });
